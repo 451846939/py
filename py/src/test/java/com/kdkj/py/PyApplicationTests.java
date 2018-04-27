@@ -1,0 +1,33 @@
+package com.kdkj.py;
+
+
+
+import com.kdkj.py.dao.LogMapper;
+import com.kdkj.py.entity.Log;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+
+//import javax.annotation.Resource;
+//@Deprecated
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@Transactional
+public class PyApplicationTests {
+	@Resource
+    LogMapper logMapper;
+	@Test
+    @Transactional
+    @Rollback(false)
+	public void contextLoads() {
+		logMapper.insert(new Log());
+
+	}
+
+}

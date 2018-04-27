@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kdkj.py.dao.LogMapper">
+	<resultMap id="BaseResultMap" type="com.kdkj.py.entity.Log">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="ip" jdbcType="VARCHAR" property="ip" />
+		<result column="op_desc" jdbcType="VARCHAR" property="opDesc" />
+		<result column="op_type" jdbcType="VARCHAR" property="opType" />
+		<result column="store_id" jdbcType="VARCHAR" property="storeId" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from sys_log
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.kdkj.py.entity.Log"
+		keyProperty='id'>
+		<selectKey keyProperty='id' resultType='String' order='BEFORE'>
+			select replace(uuid(), '-', '');
+		</selectKey>
+		insert into sys_log (id, create_date, ip,
+		op_desc, op_type, store_id
+		)
+		values (#{id,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+		#{ip,jdbcType=VARCHAR},
+		#{opDesc,jdbcType=VARCHAR}, #{opType,jdbcType=VARCHAR}, #{storeId,jdbcType=VARCHAR}
+		)
+	</insert>
+	<update id="updateByPrimaryKey" parameterType="com.kdkj.py.entity.Log">
+		update sys_log
+		set create_date = #{createDate,jdbcType=TIMESTAMP},
+		ip = #{ip,jdbcType=VARCHAR},
+		op_desc = #{opDesc,jdbcType=VARCHAR},
+		op_type = #{opType,jdbcType=VARCHAR},
+		store_id = #{storeId,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select id, create_date, ip, op_desc, op_type, store_id
+		from sys_log
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select id, create_date, ip, op_desc, op_type, store_id
+		from sys_log
+	</select>
+	<select id="selectByAttribute" resultMap="BaseResultMap">
+		select id, create_date, ip, op_desc, op_type, store_id
+		from sys_log where 1=1
+		<if test="id!=null">and id LIKE CONCAT(CONCAT('%', #{id,jdbcType=VARCHAR}),
+			'%')</if>
+		<if test="ip!=null">and ip LIKE CONCAT(CONCAT('%', #{ip,jdbcType=VARCHAR}),
+			'%')</if>
+		<if test="createDate!=null">and create_date >= #{createDate,jdbcType=TIMESTAMP}</if>
+		<if test="opType!=null">and op_type LIKE CONCAT(CONCAT('%',
+			#{opType,jdbcType=VARCHAR}), '%')</if>
+		<if test="storeId!=null">and store_id LIKE CONCAT(CONCAT('%',
+			#{storeId,jdbcType=VARCHAR}), '%')</if>
+		<if test="opDesc!=null">and op_desc LIKE CONCAT(CONCAT('%',
+			#{opDesc,jdbcType=VARCHAR}), '%')</if>
+		<if test="startTime!=null">and create_date >= #{startTime,jdbcType=TIMESTAMP}</if>
+		<if test="endTime!=null"><![CDATA[ and create_date <=  #{endTime,jdbcType=TIMESTAMP}  ]]></if>
+	</select>
+</mapper>
