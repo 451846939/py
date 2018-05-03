@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kdkj.py.dao.UsersMapper">
+  <resultMap id="BaseResultMap" type="com.kdkj.py.entity.Users">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="pass_word" jdbcType="VARCHAR" property="passWord" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="head_portrait" jdbcType="VARCHAR" property="headPortrait" />
+    <result column="hobby" jdbcType="VARCHAR" property="hobby" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="frequency" jdbcType="INTEGER" property="frequency" />
+    <result column="online_state" jdbcType="INTEGER" property="onlineState" />
+    <result column="profile" jdbcType="LONGVARCHAR" property="profile" />
+  </resultMap>
+</mapper>
